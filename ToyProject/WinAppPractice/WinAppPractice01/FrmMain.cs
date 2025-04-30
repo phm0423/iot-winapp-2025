@@ -32,8 +32,16 @@ namespace WinAppPractice01
                     string[] splitted = TxtResult.Text.Split('+');
                     if (splitted[1] != "")
                     {
-                        int rr = CalculResult("plus", int.Parse(splitted[0]), int.Parse(splitted[1]));
-                        TxtResult.Text = Convert.ToString(rr);
+                        if (splitted[0].Contains('.') || splitted[1].Contains('.'))
+                        {
+                            float fr = CalculFloatResult("plus", float.Parse(splitted[0]), float.Parse(splitted[1]));
+                            TxtResult.Text = fr.ToString("0.##########");
+                        }
+                        else
+                        {
+                            long rr = CalculIntResult("plus", long.Parse(splitted[0]), long.Parse(splitted[1]));
+                            TxtResult.Text = Convert.ToString(rr);
+                        }
                     }
                 }
 
@@ -42,8 +50,16 @@ namespace WinAppPractice01
                     string[] splitted = TxtResult.Text.Split('-');
                     if (splitted[1] != "")
                     {
-                        int rr = CalculResult("minus", int.Parse(splitted[0]), int.Parse(splitted[1]));
-                        TxtResult.Text = Convert.ToString(rr);
+                        if (splitted[0].Contains('.') || splitted[1].Contains('.'))
+                        {
+                            float fr = CalculFloatResult("minus", float.Parse(splitted[0]), float.Parse(splitted[1]));
+                            TxtResult.Text = fr.ToString("0.##########");
+                        }
+                        else
+                        {
+                            long rr = CalculIntResult("minus", long.Parse(splitted[0]), long.Parse(splitted[1]));
+                            TxtResult.Text = Convert.ToString(rr);
+                        }
                     }
                 }
 
@@ -52,8 +68,16 @@ namespace WinAppPractice01
                     string[] splitted = TxtResult.Text.Split('*');
                     if (splitted[1] != "")
                     {
-                        int rr = CalculResult("multiply", int.Parse(splitted[0]), int.Parse(splitted[1]));
-                        TxtResult.Text = Convert.ToString(rr);
+                        if (splitted[0].Contains('.') || splitted[1].Contains('.'))
+                        {
+                            float fr = CalculFloatResult("multiply", float.Parse(splitted[0]), float.Parse(splitted[1]));
+                            TxtResult.Text = fr.ToString("0.##########");
+                        }
+                        else
+                        {
+                            long rr = CalculIntResult("multiply", long.Parse(splitted[0]), long.Parse(splitted[1]));
+                            TxtResult.Text = Convert.ToString(rr);
+                        }
                     }
                 }
 
@@ -62,16 +86,49 @@ namespace WinAppPractice01
                     string[] splitted = TxtResult.Text.Split('/');
                     if (splitted[1] != "")
                     {
-                        if (Convert.ToInt32(splitted[1]) != 0)
+                        if (!splitted[1].Contains('.'))
                         {
-                            int rr = CalculResult("divide", int.Parse(splitted[0]), int.Parse(splitted[1]));
-                            TxtResult.Text = Convert.ToString(rr);
+                            if (Convert.ToInt32(splitted[1]) != 0)
+                            {
+                                if (splitted[0].Contains('.') || splitted[1].Contains('.'))
+                                {
+                                    float fr = CalculFloatResult("divide", float.Parse(splitted[0]), float.Parse(splitted[1]));
+                                    TxtResult.Text = fr.ToString("0.##########");
+                                }
+                                else
+                                {
+                                    long rr = CalculIntResult("divide", long.Parse(splitted[0]), long.Parse(splitted[1]));
+                                    TxtResult.Text = Convert.ToString(rr);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cannot divide by zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                DivideByZero = true;
+                                TxtResult.Text = string.Empty;
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Cannot divide by zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            DivideByZero = true;
-                            TxtResult.Text = string.Empty;
+                            if (float.Parse(splitted[1]) != 0)
+                            {
+                                if (splitted[0].Contains('.') || splitted[1].Contains('.'))
+                                {
+                                    float fr = CalculFloatResult("divide", float.Parse(splitted[0]), float.Parse(splitted[1]));
+                                    TxtResult.Text = fr.ToString("0.##########");
+                                }
+                                else
+                                {
+                                    long rr = CalculIntResult("divide", long.Parse(splitted[0]), long.Parse(splitted[1]));
+                                    TxtResult.Text = Convert.ToString(rr);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cannot divide by zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                DivideByZero = true;
+                                TxtResult.Text = string.Empty;
+                            }
                         }
                     }
                 }
@@ -82,9 +139,42 @@ namespace WinAppPractice01
             }
         }
 
-        public int CalculResult(string operation, int num1, int num2)
+        public long CalculIntResult(string operation, long num1, long num2)
         {
-            int CalcResult = 0;
+            long CalcResult = 0;
+            try
+            {
+                if (TxtResult.Text.Contains("+") || TxtResult.Text.Contains("-") || TxtResult.Text.Contains("*") || TxtResult.Text.Contains("/"))
+                {
+                    switch (operation)
+                    {
+                        case "plus":
+                            CalcResult = num1 + num2;
+                            break;
+                        case "minus":
+                            CalcResult = num1 - num2;
+                            break;
+                        case "multiply":
+                            CalcResult = num1 * num2;
+                            break;
+                        case "divide":
+                            CalcResult = num1 / num2; ;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return CalcResult;
+            }
+            catch
+            {
+                return CalcResult;
+            }
+        }
+
+        public float CalculFloatResult(string operation, float num1, float num2)
+        {
+            float CalcResult = 0;
             try
             {
                 if (TxtResult.Text.Contains("+") || TxtResult.Text.Contains("-") || TxtResult.Text.Contains("*") || TxtResult.Text.Contains("/"))
@@ -279,6 +369,37 @@ namespace WinAppPractice01
         {
             string bkp = RemoveLastChar(TxtResult.Text);
             TxtResult.Text = bkp;
+        }
+
+        private void BtnPoint_Click(object sender, EventArgs e)
+        {
+            int counter = 0;
+            if(TxtResult.Text != "")
+            {
+                if (TxtResult.Text[TxtResult.Text.Length - 1] != '.')
+                {
+                    char[] signs= { '+', '-', '*', '/' };
+                    foreach (char c in signs)
+                    {
+                        if (TxtResult.Text.Contains(c))
+                        {
+                            string[] SingSplitted = TxtResult.Text.Split(c);
+                            counter++;
+                            if (!SingSplitted[1].Contains('.'))
+                                TxtResult.Text += ".";
+                        }
+                    }
+                    if ( counter==0)
+                    {
+                        if (!TxtResult.Text.Contains('.'))
+                            TxtResult.Text += ".";
+                    }
+                }
+            }
+            else
+            {
+                TxtResult.Text += "0.";
+            }
         }
     }
 }

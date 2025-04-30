@@ -47,6 +47,7 @@
             BtnMinus = new Button();
             BtnBackspace = new Button();
             BtnPlus = new Button();
+            BtnPoint = new Button();
             SuspendLayout();
             // 
             // TxtResult
@@ -71,9 +72,9 @@
             // Btn0
             // 
             Btn0.Font = new Font("나눔고딕", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Btn0.Location = new Point(14, 357);
+            Btn0.Location = new Point(105, 357);
             Btn0.Name = "Btn0";
-            Btn0.Size = new Size(176, 60);
+            Btn0.Size = new Size(85, 60);
             Btn0.TabIndex = 1;
             Btn0.Text = "0";
             Btn0.UseVisualStyleBackColor = true;
@@ -255,6 +256,17 @@
             BtnPlus.UseVisualStyleBackColor = true;
             BtnPlus.Click += BtnPlus_Click;
             // 
+            // BtnPoint
+            // 
+            BtnPoint.Font = new Font("나눔고딕", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnPoint.Location = new Point(14, 357);
+            BtnPoint.Name = "BtnPoint";
+            BtnPoint.Size = new Size(85, 60);
+            BtnPoint.TabIndex = 1;
+            BtnPoint.Text = ".";
+            BtnPoint.UseVisualStyleBackColor = true;
+            BtnPoint.Click += BtnPoint_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -277,6 +289,7 @@
             Controls.Add(Btn4);
             Controls.Add(Btn2);
             Controls.Add(Btn1);
+            Controls.Add(BtnPoint);
             Controls.Add(Btn0);
             Controls.Add(TxtResult);
             Name = "FrmMain";
@@ -307,5 +320,6 @@
         private Button BtnMinus;
         private Button BtnBackspace;
         private Button BtnPlus;
+        private Button BtnPoint;
     }
 }
