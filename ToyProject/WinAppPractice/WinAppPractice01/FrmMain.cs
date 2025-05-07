@@ -12,6 +12,13 @@ namespace WinAppPractice01
             InitializeComponent();
         }
 
+        private void FocusToEnd()
+        {
+            TxtResult.Focus();
+            TxtResult.SelectionStart = TxtResult.Text.Length;
+            TxtResult.SelectionLength = 0;
+        }
+
         public string RemoveLastChar(string fulltext)
         {
             string bkp = string.Empty;
@@ -208,51 +215,61 @@ namespace WinAppPractice01
         private void Btn0_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "0";
+            FocusToEnd();
         }
 
         private void Btn1_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "1";
+            FocusToEnd();
         }
 
         private void Btn2_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "2";
+            FocusToEnd();
         }
 
         private void Btn3_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "3";
+            FocusToEnd();
         }
 
         private void Btn4_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "4";
+            FocusToEnd();
         }
 
         private void Btn5_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "5";
+            FocusToEnd();
         }
 
         private void Btn6_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "6";
+            FocusToEnd();
         }
 
         private void Btn7_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "7";
+            FocusToEnd();
         }
 
         private void Btn8_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "8";
+            FocusToEnd();
         }
 
         private void Btn9_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "9";
+            FocusToEnd();
         }
 
         private void BtnPlus_Click(object sender, EventArgs e)
@@ -278,6 +295,7 @@ namespace WinAppPractice01
                 }
             }
             operation = "plus";
+            FocusToEnd();
         }
 
         private void BtnMinus_Click(object sender, EventArgs e)
@@ -303,6 +321,7 @@ namespace WinAppPractice01
                 }
             }
             operation = "minus";
+            FocusToEnd();
         }
 
         private void BtnMultiply_Click(object sender, EventArgs e)
@@ -328,6 +347,7 @@ namespace WinAppPractice01
                 }
             }
             operation = "multiply";
+            FocusToEnd();
         }
 
         private void BtnDivide_Click(object sender, EventArgs e)
@@ -353,32 +373,36 @@ namespace WinAppPractice01
                 }
             }
             operation = "divide";
+            FocusToEnd();
         }
 
         private void BtnEqual_Click(object sender, EventArgs e)
         {
             Calculations();
+            FocusToEnd();
         }
 
         private void BtnC_Click(object sender, EventArgs e)
         {
             TxtResult.Text = string.Empty; ;
+            FocusToEnd();
         }
 
         private void BtnBackspace_Click(object sender, EventArgs e)
         {
             string bkp = RemoveLastChar(TxtResult.Text);
             TxtResult.Text = bkp;
+            FocusToEnd();
         }
 
         private void BtnPoint_Click(object sender, EventArgs e)
         {
             int counter = 0;
-            if(TxtResult.Text != "")
+            if (TxtResult.Text != "")
             {
                 if (TxtResult.Text[TxtResult.Text.Length - 1] != '.')
                 {
-                    char[] signs= { '+', '-', '*', '/' };
+                    char[] signs = { '+', '-', '*', '/' };
                     foreach (char c in signs)
                     {
                         if (TxtResult.Text.Contains(c))
@@ -389,7 +413,7 @@ namespace WinAppPractice01
                                 TxtResult.Text += ".";
                         }
                     }
-                    if ( counter==0)
+                    if (counter == 0)
                     {
                         if (!TxtResult.Text.Contains('.'))
                             TxtResult.Text += ".";
@@ -399,6 +423,15 @@ namespace WinAppPractice01
             else
             {
                 TxtResult.Text += "0.";
+            }
+            FocusToEnd();
+        }
+
+        private void TxtResult_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnEqual_Click(sender, e);
             }
         }
     }

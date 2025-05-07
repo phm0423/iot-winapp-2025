@@ -58,6 +58,7 @@
             TxtResult.Name = "TxtResult";
             TxtResult.Size = new Size(360, 46);
             TxtResult.TabIndex = 0;
+            TxtResult.KeyDown += TxtResult_KeyDown;
             // 
             // label1
             // 
