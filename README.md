@@ -1069,7 +1069,8 @@ IoT 개발자 C#/WinApp 리포지토리 2025
 
 ### 코딩테스트
 
-#### 토이 프로젝트 - 윈앱으로 만든 계산기
+#### 토이 프로젝트 
+- 윈앱으로 만든 계산기 - [소스](./ToyProject/WinAppPractice/WinAppPractice01/FrmMain.cs)
 
 <img src="./ToyProject/image/Sample01.gif" width="400">
 
