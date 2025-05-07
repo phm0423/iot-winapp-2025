@@ -12,11 +12,12 @@ namespace WinAppPractice01
             InitializeComponent();
         }
 
+        // 클릭 시 TxtResult에 포커스 주기
         private void FocusToEnd()
         {
             TxtResult.Focus();
-            TxtResult.SelectionStart = TxtResult.Text.Length;
-            TxtResult.SelectionLength = 0;
+            TxtResult.SelectionStart = TxtResult.Text.Length;   // 포커스시 커서 위치
+            TxtResult.SelectionLength = 0;                      // 커서 길이
         }
 
         public string RemoveLastChar(string fulltext)
@@ -30,6 +31,8 @@ namespace WinAppPractice01
             return bkp;
         }
 
+        // 문자열을 기호로 split하여 양쪽 수를 구분
+        // 실수와 정수 구분
         public void Calculations()
         {
             try
@@ -146,6 +149,7 @@ namespace WinAppPractice01
             }
         }
 
+        // 정수 계산 함수
         public long CalculIntResult(string operation, long num1, long num2)
         {
             long CalcResult = 0;
@@ -179,6 +183,7 @@ namespace WinAppPractice01
             }
         }
 
+        // 실수 계산 함수
         public float CalculFloatResult(string operation, float num1, float num2)
         {
             float CalcResult = 0;
@@ -212,6 +217,8 @@ namespace WinAppPractice01
             }
         }
 
+        // 숫자 버튼 클릭 이벤트
+        // FocusToEnd() 메서드로 커서 위치를 마지막으로 이동
         private void Btn0_Click(object sender, EventArgs e)
         {
             TxtResult.Text += "0";
@@ -272,6 +279,8 @@ namespace WinAppPractice01
             FocusToEnd();
         }
 
+        // 연산기호 버튼 클릭 이벤트
+        // FoucsToEnd() 메서드로 커서 위치를 마지막으로 이동
         private void BtnPlus_Click(object sender, EventArgs e)
         {
             string bkp = string.Empty;
@@ -420,6 +429,7 @@ namespace WinAppPractice01
                     }
                 }
             }
+            // 숫자 없이 . 입력 시 0.으로 시작
             else
             {
                 TxtResult.Text += "0.";
@@ -427,6 +437,7 @@ namespace WinAppPractice01
             FocusToEnd();
         }
 
+        // 엔터 키로 Equal 버튼 클릭 가능
         private void TxtResult_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
